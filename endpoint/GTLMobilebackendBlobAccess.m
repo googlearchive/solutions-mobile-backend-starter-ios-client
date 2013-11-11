@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLMobilebackend.h
+//  GTLMobilebackendBlobAccess.m
 //
 
 // ----------------------------------------------------------------------------
@@ -12,15 +12,16 @@
 //   mobilebackend/v1
 // Description:
 //   This is an API
-
-#import "GTLMobilebackendConstants.h"
+// Classes:
+//   GTLMobilebackendBlobAccess (0 custom class methods, 3 custom properties)
 
 #import "GTLMobilebackendBlobAccess.h"
-#import "GTLMobilebackendEntityDto.h"
-#import "GTLMobilebackendEntityListDto.h"
-#import "GTLMobilebackendFilter.h"
-#import "GTLMobilebackendFilterDto.h"
-#import "GTLMobilebackendQueryDto.h"
 
-#import "GTLQueryMobilebackend.h"
-#import "GTLServiceMobilebackend.h"
+// ----------------------------------------------------------------------------
+//
+//   GTLMobilebackendBlobAccess
+//
+
+@implementation GTLMobilebackendBlobAccess
+@dynamic accessUrl, mandatoryHeaders, shortLivedUrl;
+@end

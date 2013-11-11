@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLMobilebackend.h
+//  GTLMobilebackendConstants.m
 //
 
 // ----------------------------------------------------------------------------
@@ -15,12 +15,7 @@
 
 #import "GTLMobilebackendConstants.h"
 
-#import "GTLMobilebackendBlobAccess.h"
-#import "GTLMobilebackendEntityDto.h"
-#import "GTLMobilebackendEntityListDto.h"
-#import "GTLMobilebackendFilter.h"
-#import "GTLMobilebackendFilterDto.h"
-#import "GTLMobilebackendQueryDto.h"
-
-#import "GTLQueryMobilebackend.h"
-#import "GTLServiceMobilebackend.h"
+// AccessMode
+NSString * const kGTLMobilebackendAccessModePrivate            = @"PRIVATE";
+NSString * const kGTLMobilebackendAccessModePublicRead         = @"PUBLIC_READ";
+NSString * const kGTLMobilebackendAccessModePublicReadForAppUsers = @"PUBLIC_READ_FOR_APP_USERS";

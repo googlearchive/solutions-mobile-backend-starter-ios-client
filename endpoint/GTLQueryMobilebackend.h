@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryMobilebackend (10 custom class methods, 10 custom properties)
+//   GTLQueryMobilebackend (13 custom class methods, 14 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -37,16 +37,46 @@
 //
 // Method-specific parameters; see the comments below for more information.
 //
+@property (copy) NSString *accessMode;
+@property (copy) NSString *bucketName;
+@property (copy) NSString *contentType;
 @property (retain) GTLDateTime *createdAt;
 @property (copy) NSString *createdBy;
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
 @property (copy) NSString *identifier;
 @property (copy) NSString *kind;
 @property (copy) NSString *kindName;
+@property (copy) NSString *objectPath;
 @property (copy) NSString *owner;
 @property (retain) id properties;
 @property (retain) GTLDateTime *updatedAt;
 @property (copy) NSString *updatedBy;
+
+#pragma mark -
+#pragma mark "blobEndpoint" methods
+// These create a GTLQueryMobilebackend object.
+
+// Method: mobilebackend.blobEndpoint.deleteBlob
++ (id)queryForBlobEndpointDeleteBlobWithBucketName:(NSString *)bucketName
+                                        objectPath:(NSString *)objectPath;
+
+// Method: mobilebackend.blobEndpoint.getDownloadUrl
+// Fetches a GTLMobilebackendBlobAccess.
++ (id)queryForBlobEndpointGetDownloadUrlWithBucketName:(NSString *)bucketName
+                                            objectPath:(NSString *)objectPath;
+
+// Method: mobilebackend.blobEndpoint.getUploadUrl
+//  Required:
+//   accessMode:
+//      kGTLMobilebackendAccessModePrivate: "PRIVATE"
+//      kGTLMobilebackendAccessModePublicRead: "PUBLIC_READ"
+//      kGTLMobilebackendAccessModePublicReadForAppUsers: "PUBLIC_READ_FOR_APP_USERS"
+//  Optional:
+//   contentType: NSString
+// Fetches a GTLMobilebackendBlobAccess.
++ (id)queryForBlobEndpointGetUploadUrlWithBucketName:(NSString *)bucketName
+                                          objectPath:(NSString *)objectPath
+                                          accessMode:(NSString *)accessMode;
 
 #pragma mark -
 #pragma mark "endpointV1" methods

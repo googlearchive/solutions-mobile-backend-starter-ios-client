@@ -16,6 +16,9 @@
 // Description:
 //   This is an API
 
+#import "GTLMobilebackendConstants.m"
+
+#import "GTLMobilebackendBlobAccess.m"
 #import "GTLMobilebackendEntityDto.m"
 #import "GTLMobilebackendEntityListDto.m"
 #import "GTLMobilebackendFilter.m"

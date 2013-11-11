@@ -25,6 +25,7 @@
 + (NSArray *)checkClasses {
   NSArray *classes = [NSArray arrayWithObjects:
                       [GTLQueryMobilebackend class],
+                      [GTLMobilebackendBlobAccess class],
                       [GTLMobilebackendEntityDto class],
                       [GTLMobilebackendEntityListDto class],
                       [GTLMobilebackendFilter class],
@@ -44,7 +45,7 @@
     // From discovery.  Where to send JSON-RPC.
     // Turn off prettyPrint for this service to save bandwidth (especially on
     // mobile). The fetcher logging will pretty print.
-    self.rpcURL = NULL;
+    self.rpcURL = [NSURL URLWithString:@"https://jennytestapp16.appspot.com/_ah/api/rpc?prettyPrint=false"];
   }
   return self;
 }

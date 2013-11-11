@@ -42,8 +42,8 @@ NSString *const kCloudMessagingManagerTopicIDBroadcast = @"_broadcast";
 NSString *const kCloudMessagingPrefKeyPrefixMsgTimestamp =
     @"PREF_KEY_PREFIX_MSG_TIMESTAMP";
 
-// Subscription for Cloud Message would last for 7 days by default
-static const int kCloudMessagingSubscriptionDuration = 60 * 60 * 24 * 7;
+// Subscription for Cloud Message will not expire by default
+static const int kCloudMessagingSubscriptionDuration = 0;
 // Max number of past messages to receive
 static const int kCloudMessagingDefaultMaxMessagesToReceive = 100;
 static CloudMessagingManager *singleton;

@@ -13,24 +13,61 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryMobilebackend (10 custom class methods, 10 custom properties)
+//   GTLQueryMobilebackend (13 custom class methods, 14 custom properties)
 
 #import "GTLQueryMobilebackend.h"
 
+#import "GTLMobilebackendBlobAccess.h"
 #import "GTLMobilebackendEntityDto.h"
 #import "GTLMobilebackendEntityListDto.h"
 #import "GTLMobilebackendQueryDto.h"
 
 @implementation GTLQueryMobilebackend
 
-@dynamic createdAt, createdBy, fields, identifier, kind, kindName, owner,
-         properties, updatedAt, updatedBy;
+@dynamic accessMode, bucketName, contentType, createdAt, createdBy, fields,
+         identifier, kind, kindName, objectPath, owner, properties, updatedAt,
+         updatedBy;
 
 + (NSDictionary *)parameterNameMap {
   NSDictionary *map =
     [NSDictionary dictionaryWithObject:@"id"
                                 forKey:@"identifier"];
   return map;
+}
+
+#pragma mark -
+#pragma mark "blobEndpoint" methods
+// These create a GTLQueryMobilebackend object.
+
++ (id)queryForBlobEndpointDeleteBlobWithBucketName:(NSString *)bucketName
+                                        objectPath:(NSString *)objectPath {
+  NSString *methodName = @"mobilebackend.blobEndpoint.deleteBlob";
+  GTLQueryMobilebackend *query = [self queryWithMethodName:methodName];
+  query.bucketName = bucketName;
+  query.objectPath = objectPath;
+  return query;
+}
+
++ (id)queryForBlobEndpointGetDownloadUrlWithBucketName:(NSString *)bucketName
+                                            objectPath:(NSString *)objectPath {
+  NSString *methodName = @"mobilebackend.blobEndpoint.getDownloadUrl";
+  GTLQueryMobilebackend *query = [self queryWithMethodName:methodName];
+  query.bucketName = bucketName;
+  query.objectPath = objectPath;
+  query.expectedObjectClass = [GTLMobilebackendBlobAccess class];
+  return query;
+}
+
++ (id)queryForBlobEndpointGetUploadUrlWithBucketName:(NSString *)bucketName
+                                          objectPath:(NSString *)objectPath
+                                          accessMode:(NSString *)accessMode {
+  NSString *methodName = @"mobilebackend.blobEndpoint.getUploadUrl";
+  GTLQueryMobilebackend *query = [self queryWithMethodName:methodName];
+  query.bucketName = bucketName;
+  query.objectPath = objectPath;
+  query.accessMode = accessMode;
+  query.expectedObjectClass = [GTLMobilebackendBlobAccess class];
+  return query;
 }
 
 #pragma mark -
