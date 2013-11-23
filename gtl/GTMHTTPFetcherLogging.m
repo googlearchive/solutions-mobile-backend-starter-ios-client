@@ -32,12 +32,14 @@
 //
 // We locally declare methods of GTMReadMonitorInputStream so we
 // do not need to import the header, as some projects may not have it available
+#ifndef GTM_NSSTREAM_DELEGATE
 @interface GTMReadMonitorInputStream : NSInputStream
 + (id)inputStreamWithStream:(NSInputStream *)input;
 @property (assign) id readDelegate;
 @property (assign) SEL readSelector;
 @property (retain) NSArray *runLoopModes;
 @end
+#endif
 
 // If GTMNSJSONSerialization is available, it is used for formatting JSON
 #if (TARGET_OS_MAC && !TARGET_OS_IPHONE && (MAC_OS_X_VERSION_MAX_ALLOWED < 1070)) || \
@@ -165,7 +167,7 @@ static NSString* gLoggingProcessName = nil;
     [loggingProcessName replaceOccurrencesOfString:@" "
                                         withString:@"_"
                                            options:0
-                                             range:NSMakeRange(0, [gLoggingProcessName length])];
+                                             range:NSMakeRange(0, [loggingProcessName length])];
     gLoggingProcessName = loggingProcessName;
   }
   return gLoggingProcessName;
@@ -341,7 +343,7 @@ static NSString* gLoggingProcessName = nil;
   @synchronized(self) {
     if (flag != shouldDeferResponseBodyLogging_) {
       shouldDeferResponseBodyLogging_ = flag;
-      if (!flag) {
+      if (!flag && !hasLoggedError_) {
         [self performSelectorOnMainThread:@selector(logFetchWithError:)
                                withObject:nil
                             waitUntilDone:NO];
@@ -606,6 +608,16 @@ static NSString* gLoggingProcessName = nil;
   // write the request URL
   NSString *requestMethod = [request HTTPMethod];
   NSURL *requestURL = [request URL];
+
+  NSURL *redirectedFromHost = [[[redirectedFromURL_ host] copy] autorelease];
+  // Save the request URL for next time in case this redirects.
+  [redirectedFromURL_ release];
+  redirectedFromURL_ = [requestURL copy];
+  if (redirectedFromHost) {
+    [outputHTML appendFormat:@"<FONT COLOR='#990066'><i>redirected from %@</i></FONT><br>",
+     redirectedFromHost];
+  }
+
   [outputHTML appendFormat:@"<b>request:</b> %@ <code>%@</code><br>\n",
    requestMethod, requestURL];
 
@@ -794,6 +806,9 @@ static NSString* gLoggingProcessName = nil;
     [copyable appendFormat:@"%@\n\n", comment];
   }
   [copyable appendFormat:@"%@\n", [NSDate date]];
+  if (redirectedFromHost) {
+    [copyable appendFormat:@"Redirected from %@\n", redirectedFromHost];
+  }
   [copyable appendFormat:@"Request: %@ %@\n", requestMethod, requestURL];
   if ([requestHeaders count] > 0) {
     [copyable appendFormat:@"Request headers:\n%@\n",

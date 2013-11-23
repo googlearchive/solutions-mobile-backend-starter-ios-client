@@ -13,6 +13,10 @@
  * limitations under the License.
  */
 
+#if !defined(__has_feature) || !__has_feature(objc_arc)
+#error "This file requires ARC support."
+#endif
+
 #import "EditModeUITextView.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -22,15 +26,20 @@
   _mode = mode;
 
   // Reset the border color based on the edit mode
+  CALayer *viewLayer = [self layer];
   if (self.mode == kTextViewModeEdit) {
-    [[self layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [viewLayer setBorderColor:[[UIColor grayColor] CGColor]];
   } else {
-    [[self layer] setBorderColor:[[UIColor blueColor] CGColor]];
+    [viewLayer setBorderColor:[[UIColor blueColor] CGColor]];
     self.text = nil; // Reset text field to nothing in insert mode
   }
+    
+  [self setFont:[UIFont systemFontOfSize:17.0]];
+    
+  [self setReturnKeyType:UIReturnKeySend];
 
   [[self layer] setBorderWidth:2.5];
-  [[self layer] setCornerRadius:7];
+  [[self layer] setCornerRadius:0];
   [self setContentInset:UIEdgeInsetsMake(5, 5, 5, 5)];
 }
 

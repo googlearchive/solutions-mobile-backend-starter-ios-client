@@ -466,33 +466,41 @@ totalBytesExpectedToSend:totalBytesExpectedToWrite];
     offset = 0;
   } else {
     // uploading the next data chunk
+    if (dataLen == 0) {
 #if DEBUG
-    NSAssert2(offset < dataLen, @"offset %llu exceeds data length %llu",
-              (unsigned long long)offset, (unsigned long long)dataLen);
+      NSAssert(offset == 0, @"offset %llu for empty data length", (unsigned long long)offset);
 #endif
+      chunkData = [NSData data];
+      rangeStr = @"bytes */0";
+      lengthStr = @"0";
+    } else {
+#if DEBUG
+      NSAssert(offset < dataLen , @"offset %llu exceeds data length %llu",
+               (unsigned long long)offset, (unsigned long long)dataLen);
+#endif
+      NSUInteger thisChunkSize = chunkSize;
 
-    NSUInteger thisChunkSize = chunkSize;
+      // if the chunk size is bigger than the remaining data, or else
+      // it's close enough in size to the remaining data that we'd rather
+      // avoid having a whole extra http fetch for the leftover bit, then make
+      // this chunk size exactly match the remaining data size
+      BOOL isChunkTooBig = (thisChunkSize + offset > dataLen);
+      BOOL isChunkAlmostBigEnough = (dataLen - offset < thisChunkSize + 2500);
 
-    // if the chunk size is bigger than the remaining data, or else
-    // it's close enough in size to the remaining data that we'd rather
-    // avoid having a whole extra http fetch for the leftover bit, then make
-    // this chunk size exactly match the remaining data size
-    BOOL isChunkTooBig = (thisChunkSize + offset > dataLen);
-    BOOL isChunkAlmostBigEnough = (dataLen - offset < thisChunkSize + 2500);
+      if (isChunkTooBig || isChunkAlmostBigEnough) {
+        thisChunkSize = dataLen - offset;
+      }
 
-    if (isChunkTooBig || isChunkAlmostBigEnough) {
-      thisChunkSize = dataLen - offset;
+      chunkData = [self uploadSubdataWithOffset:offset
+                                         length:thisChunkSize];
+
+      rangeStr = [NSString stringWithFormat:@"bytes %llu-%llu/%llu",
+                  (unsigned long long)offset,
+                  (unsigned long long)(offset + thisChunkSize - 1),
+                  (unsigned long long)dataLen];
+      lengthStr = [NSString stringWithFormat:@"%llu",
+                   (unsigned long long)thisChunkSize];
     }
-
-    chunkData = [self uploadSubdataWithOffset:offset
-                                       length:thisChunkSize];
-
-    rangeStr = [NSString stringWithFormat:@"bytes %llu-%llu/%llu",
-                (unsigned long long)offset,
-                (unsigned long long)(offset + thisChunkSize - 1),
-                (unsigned long long)dataLen];
-    lengthStr = [NSString stringWithFormat:@"%llu",
-                 (unsigned long long)thisChunkSize];
   }
 
   // track the current offset for progress reporting

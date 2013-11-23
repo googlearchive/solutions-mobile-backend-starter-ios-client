@@ -15,29 +15,77 @@
 
 #if GTM_INCLUDE_OAUTH2 || !GDATA_REQUIRE_SERVICE_INCLUDES
 
-#define GTMOAUTH2AUTHENTICATION_DEFINE_GLOBALS 1
 #import "GTMOAuth2Authentication.h"
 
+// Extern strings
+
+NSString *const kGTMOAuth2ServiceProviderGoogle = @"Google";
+
+NSString *const kGTMOAuth2ErrorDomain  = @"com.google.GTMOAuth2";
+
+NSString *const kGTMOAuth2ErrorMessageKey = @"error";
+NSString *const kGTMOAuth2ErrorRequestKey = @"request";
+NSString *const kGTMOAuth2ErrorJSONKey    = @"json";
+
+// Notifications
+NSString *const kGTMOAuth2FetchStarted        = @"kGTMOAuth2FetchStarted";
+NSString *const kGTMOAuth2FetchStopped        = @"kGTMOAuth2FetchStopped";
+
+NSString *const kGTMOAuth2FetcherKey          = @"fetcher";
+NSString *const kGTMOAuth2FetchTypeKey        = @"FetchType";
+NSString *const kGTMOAuth2FetchTypeToken      = @"token";
+NSString *const kGTMOAuth2FetchTypeRefresh    = @"refresh";
+NSString *const kGTMOAuth2FetchTypeAssertion  = @"assertion";
+NSString *const kGTMOAuth2FetchTypeUserInfo   = @"userInfo";
+
+NSString *const kGTMOAuth2ErrorKey                  = @"error";
+NSString *const kGTMOAuth2ErrorObjectKey            = @"kGTMOAuth2ErrorObjectKey";
+
+NSString *const kGTMOAuth2ErrorInvalidRequest       = @"invalid_request";
+NSString *const kGTMOAuth2ErrorInvalidClient        = @"invalid_client";
+NSString *const kGTMOAuth2ErrorInvalidGrant         = @"invalid_grant";
+NSString *const kGTMOAuth2ErrorUnauthorizedClient   = @"unauthorized_client";
+NSString *const kGTMOAuth2ErrorUnsupportedGrantType = @"unsupported_grant_type";
+NSString *const kGTMOAuth2ErrorInvalidScope         = @"invalid_scope";
+
+NSString *const kGTMOAuth2UserSignedIn              = @"kGTMOAuth2UserSignedIn";
+
+NSString *const kGTMOAuth2AccessTokenRefreshed     = @"kGTMOAuth2AccessTokenRefreshed";
+NSString *const kGTMOAuth2RefreshTokenChanged      = @"kGTMOAuth2RefreshTokenChanged";
+NSString *const kGTMOAuth2AccessTokenRefreshFailed = @"kGTMOAuth2AccessTokenRefreshFailed";
+
+NSString *const kGTMOAuth2WebViewStartedLoading = @"kGTMOAuth2WebViewStartedLoading";
+NSString *const kGTMOAuth2WebViewStoppedLoading = @"kGTMOAuth2WebViewStoppedLoading";
+NSString *const kGTMOAuth2WebViewKey            = @"kGTMOAuth2WebViewKey";
+NSString *const kGTMOAuth2WebViewStopKindKey    = @"kGTMOAuth2WebViewStopKindKey";
+NSString *const kGTMOAuth2WebViewFinished       = @"finished";
+NSString *const kGTMOAuth2WebViewFailed         = @"failed";
+NSString *const kGTMOAuth2WebViewCancelled      = @"cancelled";
+
+NSString *const kGTMOAuth2NetworkLost         = @"kGTMOAuthNetworkLost";
+NSString *const kGTMOAuth2NetworkFound        = @"kGTMOAuthNetworkFound";
+
+
 // standard OAuth keys
-static NSString *const kOAuth2AccessTokenKey       = @"access_token";
-static NSString *const kOAuth2RefreshTokenKey      = @"refresh_token";
-static NSString *const kOAuth2ClientIDKey          = @"client_id";
-static NSString *const kOAuth2ClientSecretKey      = @"client_secret";
-static NSString *const kOAuth2RedirectURIKey       = @"redirect_uri";
-static NSString *const kOAuth2ResponseTypeKey      = @"response_type";
-static NSString *const kOAuth2ScopeKey             = @"scope";
-static NSString *const kOAuth2ErrorKey             = @"error";
-static NSString *const kOAuth2TokenTypeKey         = @"token_type";
-static NSString *const kOAuth2ExpiresInKey         = @"expires_in";
-static NSString *const kOAuth2CodeKey              = @"code";
-static NSString *const kOAuth2AssertionKey         = @"assertion";
-static NSString *const kOAuth2RefreshScopeKey      = @"refreshScope";
+static NSString *const kOAuth2AccessTokenKey   = @"access_token";
+static NSString *const kOAuth2RefreshTokenKey  = @"refresh_token";
+static NSString *const kOAuth2ClientIDKey      = @"client_id";
+static NSString *const kOAuth2ClientSecretKey  = @"client_secret";
+static NSString *const kOAuth2RedirectURIKey   = @"redirect_uri";
+static NSString *const kOAuth2ResponseTypeKey  = @"response_type";
+static NSString *const kOAuth2ScopeKey         = @"scope";
+static NSString *const kOAuth2ErrorKey         = @"error";
+static NSString *const kOAuth2TokenTypeKey     = @"token_type";
+static NSString *const kOAuth2ExpiresInKey     = @"expires_in";
+static NSString *const kOAuth2CodeKey          = @"code";
+static NSString *const kOAuth2AssertionKey     = @"assertion";
+static NSString *const kOAuth2RefreshScopeKey  = @"refreshScope";
 
 // additional persistent keys
-static NSString *const kServiceProviderKey        = @"serviceProvider";
-static NSString *const kUserIDKey                 = @"userID";
-static NSString *const kUserEmailKey              = @"email";
-static NSString *const kUserEmailIsVerifiedKey    = @"isVerified";
+static NSString *const kServiceProviderKey     = @"serviceProvider";
+static NSString *const kUserIDKey              = @"userID";
+static NSString *const kUserEmailKey           = @"email";
+static NSString *const kUserEmailIsVerifiedKey = @"isVerified";
 
 // fetcher keys
 static NSString *const kTokenFetchDelegateKey = @"delegate";
@@ -133,8 +181,6 @@ static NSString *const kRefreshFetchArgsKey = @"requestArgs";
 - (BOOL)shouldRefreshAccessToken;
 
 - (void)updateExpirationDate;
-
-- (NSDictionary *)dictionaryWithJSONData:(NSData *)data;
 
 - (void)tokenFetcher:(GTMHTTPFetcher *)fetcher
     finishedWithData:(NSData *)data
@@ -295,11 +341,11 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (void)setKeysForResponseJSONData:(NSData *)data {
-  NSDictionary *dict = [self dictionaryWithJSONData:data];
+  NSDictionary *dict = [[self class] dictionaryWithJSONData:data];
   [self setKeysForResponseDictionary:dict];
 }
 
-- (NSDictionary *)dictionaryWithJSONData:(NSData *)data {
++ (NSDictionary *)dictionaryWithJSONData:(NSData *)data {
   NSMutableDictionary *obj = nil;
   NSError *error = nil;
 
@@ -810,8 +856,8 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
   }
 
-  NSString *const template = (refreshToken ? @"refresh token for %@" : @"fetch tokens for %@");
-  [fetcher setCommentWithFormat:template, [tokenURL host]];
+  NSString *const template = (refreshToken ? @"refresh token for %@ %@" : @"fetch tokens for %@ %@");
+  [fetcher setCommentWithFormat:template, [tokenURL host], [self userEmail]];
   fetcher.postData = paramData;
   fetcher.retryEnabled = YES;
   fetcher.maxRetryInterval = 15.0;
@@ -853,11 +899,11 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
   BOOL hasData = ([data length] > 0);
 
   if (error) {
-    // Failed; if the error body is JSON, parse it and add it to the error's
-    // userInfo dictionary
+    // Failed. If the error body is JSON, parse it and add it to the error's
+    // userInfo dictionary.
     if (hasData) {
       if (isResponseJSON) {
-        NSDictionary *errorJson = [self dictionaryWithJSONData:data];
+        NSDictionary *errorJson = [[self class] dictionaryWithJSONData:data];
         if ([errorJson count] > 0) {
 #if DEBUG
           NSLog(@"Error %@\nError data:\n%@", error, errorJson);
@@ -877,7 +923,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
       }
     }
   } else {
-    // Succeeded; we have an access token
+    // Succeeded; we have the requested token.
 #if DEBUG
     NSAssert(hasData, @"data missing in token response");
 #endif
@@ -1075,7 +1121,11 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (NSNumber *)expiresIn {
-  return [self.parameters objectForKey:kOAuth2ExpiresInKey];
+  id value = [self.parameters objectForKey:kOAuth2ExpiresInKey];
+  if ([value isKindOfClass:[NSString class]]) {
+    value = [NSNumber numberWithInteger:[value integerValue]];
+  }
+  return value;
 }
 
 - (void)setExpiresIn:(NSNumber *)num {

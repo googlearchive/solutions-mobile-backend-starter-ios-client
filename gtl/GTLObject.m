@@ -17,8 +17,6 @@
 //  GTLObject.m
 //
 
-#define GTLOBJECT_DEFINE_GLOBALS 1
-
 #include <objc/runtime.h>
 
 #import "GTLObject.h"
@@ -516,8 +514,13 @@ static NSMutableDictionary *gKindMap = nil;
                 defaultClass:(Class)defaultClass
                   surrogates:(NSDictionary *)surrogates
                batchClassMap:(NSDictionary *)batchClassMap {
-  if ([json count] == 0 || [json isEqual:[NSNull null]]) {
-    // no actual result, such as the response from a delete
+  if ([json isEqual:[NSNull null]] || [json count] == 0) {
+    if (json != nil && defaultClass != Nil) {
+      // The JSON included an empty dictionary, and a return class
+      // was specified.
+      return [defaultClass object];
+    }
+    // No actual result, such as the response from a delete.
     return nil;
   }
 

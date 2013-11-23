@@ -107,19 +107,14 @@ static NSArray *operators;
 + (CloudFilter *)cloudFilterInValues:(NSString *)property
                               values:(id)value, ... {
   CloudFilter *f = [[CloudFilter alloc] init];
-  f.filterDto = [[GTLMobilebackendFilterDto alloc] init];
   f.filterDto.operatorProperty = @"IN";
 
-  if (property && value) {
+  if (value) {
+    NSArray *values = [NSMutableArray arrayWithObject:value];
     va_list argumentList;
     va_start(argumentList, value);
-
-    NSMutableArray *array = [NSMutableArray arrayWithObject:property];
-    [array addObjectsFromArray:[self arrayFromAugumentList:value
-                                                 arguments:argumentList]];
-    f.filterDto.values = array;
+    values = [self arrayFromAugumentList:value arguments:argumentList];
     va_end(argumentList);
-
     return f;
   }
 
@@ -144,7 +139,7 @@ static NSArray *operators;
   NSArray *subfilters = [self filterDtoArrayFromArgumentList:filter
                                                    arguments:argumentList];
   va_end(argumentList);
-
+  
   return [CloudFilter filterAndOrWithOperator:FilterOperatorOR
                                       filters:subfilters];
 }
@@ -153,10 +148,12 @@ static NSArray *operators;
 + (NSArray *)arrayFromAugumentList:(id)firstObject
                          arguments:(va_list)argumentList {
   NSMutableArray *resultedArray = [[NSMutableArray alloc] init];
-  id eachItem = firstObject;
-  while (eachItem) {
+  [resultedArray addObject:firstObject];
+
+  // Loop the rest
+  id eachItem = nil;
+  while ((eachItem = va_arg(argumentList, id))) {
     [resultedArray addObject:eachItem];
-    eachItem = va_arg(argumentList, id);
   }
 
   return resultedArray;
@@ -166,13 +163,12 @@ static NSArray *operators;
 + (NSArray *)filterDtoArrayFromArgumentList:(CloudFilter *)firstObject
                                   arguments:(va_list)argumentList {
   NSMutableArray *resultedArray = [[NSMutableArray alloc] init];
+  [resultedArray addObject:firstObject.filterDto];
 
-  CloudFilter *eachItem = firstObject;
-  while (eachItem) {
-    if (eachItem.filterDto) {
-      [resultedArray addObject:eachItem.filterDto];
-    }
-    eachItem = va_arg(argumentList, CloudFilter *);
+  // Loop the rest
+  CloudFilter *eachItem = nil;
+  while ((eachItem = va_arg(argumentList, CloudFilter *))) {
+    [resultedArray addObject:eachItem.filterDto];
   }
 
   return resultedArray;

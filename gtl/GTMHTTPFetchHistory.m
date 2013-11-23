@@ -17,13 +17,20 @@
 //  GTMHTTPFetchHistory.m
 //
 
-#define GTMHTTPFETCHHISTORY_DEFINE_GLOBALS 1
-
 #import "GTMHTTPFetchHistory.h"
 
 const NSTimeInterval kCachedURLReservationInterval = 60.0; // 1 minute
 static NSString* const kGTMIfNoneMatchHeader = @"If-None-Match";
 static NSString* const kGTMETagHeader = @"Etag";
+
+#if GTM_IPHONE
+// iPhone: up to 1MB memory
+const NSUInteger kGTMDefaultETaggedDataCacheMemoryCapacity = 1 * 1024 * 1024;
+#else
+// Mac OS X: up to 15MB memory
+const NSUInteger kGTMDefaultETaggedDataCacheMemoryCapacity = 15 * 1024 * 1024;
+#endif
+
 
 @implementation GTMCookieStorage
 

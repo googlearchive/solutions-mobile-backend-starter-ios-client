@@ -158,7 +158,13 @@
 - (BOOL)fetcherShouldBeginFetching:(GTMHTTPFetcher *)fetcher {
   // Entry point from the fetcher
   @synchronized(self) {
-    NSString *host = [[[fetcher mutableRequest] URL] host];
+    NSURL *requestURL = [[fetcher mutableRequest] URL];
+    NSString *host = [requestURL host];
+
+    // Addresses "file:///path" case where localhost is the implicit host.
+    if ([host length] == 0 && [requestURL isFileURL]) {
+      host = @"localhost";
+    }
 
     if ([host length] == 0) {
 #if DEBUG
@@ -260,11 +266,13 @@
         }
       }
 
-      [self addRunningFetcher:nextFetcher forHost:host];
-      runningForHost = [runningHosts_ objectForKey:host];
+      if (nextFetcher) {
+        [self addRunningFetcher:nextFetcher forHost:host];
+        runningForHost = [runningHosts_ objectForKey:host];
 
-      [delayedForHost removeObjectIdenticalTo:nextFetcher];
-      [self startFetcher:nextFetcher];
+        [delayedForHost removeObjectIdenticalTo:nextFetcher];
+        [self startFetcher:nextFetcher];
+      }
     }
 
     if ([runningForHost count] == 0) {

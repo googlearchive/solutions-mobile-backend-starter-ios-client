@@ -18,6 +18,7 @@
 //
 
 #include <objc/runtime.h>
+#include <TargetConditionals.h>
 
 #import "GTLRuntimeCommon.h"
 
@@ -805,7 +806,8 @@ static void DynamicNSObjectSetter(id<GTLRuntimeCommon> self, SEL sel, id obj) {
 static objc_property_t PropertyForSel(Class<GTLRuntimeCommon> startClass,
                                       SEL sel, BOOL isSetter,
                                       Class<GTLRuntimeCommon> *outFoundClass) {
-  const char *baseName = sel_getName(sel);
+  const char *selName = sel_getName(sel);
+  const char *baseName = selName;
   size_t baseNameLen = strlen(baseName);
   if (isSetter) {
     baseName += 3;    // skip "set"
@@ -822,23 +824,52 @@ static objc_property_t PropertyForSel(Class<GTLRuntimeCommon> startClass,
     objc_property_t *properties = class_copyPropertyList(currClass, NULL);
     if (properties) {
       for (objc_property_t *prop = properties; *prop != NULL; ++prop) {
-        const char *propName = property_getName(*prop);
-        size_t propNameLen = strlen(propName);
+        const char *propAttrs = property_getAttributes(*prop);
+        const char *dynamicMarker = strstr(propAttrs, ",D");
+        if (!dynamicMarker ||
+            (dynamicMarker[2] != 0 && dynamicMarker[2] != ',' )) {
+          // It isn't dynamic, skip it.
+          continue;
+        }
 
-        // search for an exact-name match (a getter), but case-insensitive on the
-        // first character (in case baseName comes from a setter)
-        if (baseNameLen == propNameLen
-            && strncasecmp(baseName, propName, 1) == 0
-            && (baseNameLen <= 1
-                || strncmp(baseName + 1, propName + 1, baseNameLen - 1) == 0)) {
-              // return the actual property name
+        if (!isSetter) {
+          // See if this property has an explicit getter=. (the attributes always start with a T,
+          // so we can check for the leading ','.
+          const char *getterMarker = strstr(propAttrs, ",G");
+          if (getterMarker) {
+            const char *getterStart = getterMarker + 2;
+            const char *getterEnd = getterStart;
+            while ((*getterEnd != 0) && (*getterEnd != ',')) {
+              ++getterEnd;
+            }
+            size_t getterLen = (size_t)(getterEnd - getterStart);
+            if ((strncmp(selName, getterStart, getterLen) == 0)
+                && (selName[getterLen] == 0)) {
+              // return the actual property
               foundProp = *prop;
-
               // if requested, return the class containing the property
               if (outFoundClass) *outFoundClass = currClass;
               break;
             }
-      }
+          }  // if (getterMarker)
+        }  // if (!isSetter)
+
+        // Search for an exact-name match (a getter), but case-insensitive on the
+        // first character (in case baseName comes from a setter)
+        const char *propName = property_getName(*prop);
+        size_t propNameLen = strlen(propName);
+        if (baseNameLen == propNameLen
+            && strncasecmp(baseName, propName, 1) == 0
+            && (baseNameLen <= 1
+                || strncmp(baseName + 1, propName + 1, baseNameLen - 1) == 0)) {
+          // return the actual property
+          foundProp = *prop;
+
+          // if requested, return the class containing the property
+          if (outFoundClass) *outFoundClass = currClass;
+          break;
+        }
+      }  // for (prop in properties)
       free(properties);
     }
     if (foundProp) return foundProp;
@@ -881,7 +912,8 @@ static const GTLDynamicImpInfo *DynamicImpInfoForProperty(objc_property_t prop,
   //   T@"NSString",&,D,P
   //   Ti,D -- NSInteger on 32bit
   //   Tq,D -- NSInteger on 64bit, long long on 32bit & 64bit
-  //   Tc,D -- BOOL comes as char
+  //   TB,D -- BOOL comes as bool on 64bit iOS
+  //   Tc,D -- BOOL comes as char otherwise
   //   T@"NSString",D
   //   T@"GTLLink",D
   //   T@"NSArray",D
@@ -932,13 +964,25 @@ static const GTLDynamicImpInfo *DynamicImpInfoForProperty(objc_property_t prop,
       nil, nil,
       NO
     },
-    { // BOOL
+// This conditional matches the one in iPhoneOS.platform version of
+// <objc/objc.h> that controls the definition of BOOL.
+#if !defined(OBJC_HIDE_64) && TARGET_OS_IPHONE && __LP64__
+    { // BOOL as bool
+      "TB",
+      "v@:B", (IMP)DynamicBooleanSetter,
+      "B@:", (IMP)DynamicBooleanGetter,
+      nil, nil,
+      NO
+    },
+#else
+    { // BOOL as char
       "Tc",
       "v@:c", (IMP)DynamicBooleanSetter,
       "c@:", (IMP)DynamicBooleanGetter,
       nil, nil,
       NO
     },
+#endif
     { // NSString
       "T@\"NSString\"",
       "v@:@", (IMP)DynamicStringSetter,

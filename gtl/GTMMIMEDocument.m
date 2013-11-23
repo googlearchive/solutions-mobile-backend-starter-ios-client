@@ -174,7 +174,7 @@ static BOOL memsrch(const unsigned char* needle, NSUInteger needle_len,
   // use an easily-readable boundary string
   NSString *const kBaseBoundary = @"END_OF_PART";
 
-  NSMutableString *boundary = [NSMutableString stringWithString:kBaseBoundary];
+  NSString *boundary = kBaseBoundary;
 
   // if the boundary isn't unique, append random numbers, up to 10 attempts;
   // if that's still not unique, use a random number sequence instead,
