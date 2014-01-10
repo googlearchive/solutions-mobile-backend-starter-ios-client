@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="2U6-68-jm3">
+    <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <development version="4600" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--Messages Table View Controller - Guestbook-->
+        <scene sceneID="uzC-c9-HdV">
+            <objects>
+                <tableViewController id="eFf-Qo-AH9" customClass="MessagesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="64v-CK-LlB">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Message Detail" textLabel="pVk-sI-RCP" detailTextLabel="C5p-DE-dVg" style="IBUITableViewCellStyleSubtitle" id="ayC-lF-OHd">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVk-sI-RCP">
+                                            <rect key="frame" x="10" y="2" width="36" height="22"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5p-DE-dVg">
+                                            <rect key="frame" x="10" y="24" width="50" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eFf-Qo-AH9" id="qLd-KQ-X7z"/>
+                            <outlet property="delegate" destination="eFf-Qo-AH9" id="ZkR-TN-GER"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Guestbook" id="5zL-w4-uDF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="28T-2Q-chv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-98" y="-1047"/>
+        </scene>
+        <!--Splash1 View Controller-->
+        <scene sceneID="xhF-wj-ZOE">
+            <objects>
+                <viewController storyboardIdentifier="SplashScreenStart" id="2U6-68-jm3" customClass="Splash1ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TQy-68-0ez">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dcn-Wt-NVx">
+                                <rect key="frame" x="7" y="28" width="306" height="512"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_guestbook_splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="I3X-3n-gm0">
+                                        <rect key="frame" x="77" y="15" width="153" height="139"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="153" id="9kr-IB-UqD"/>
+                                            <constraint firstAttribute="height" constant="139" id="ia3-70-Iil"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest Book Sample App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU4-eB-ReF">
+                                        <rect key="frame" x="17" y="190" width="272" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="gHo-HM-4V5"/>
+                                            <constraint firstAttribute="width" constant="272" id="tGZ-QD-dNG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.92549026012420654" green="0.72549021244049072" blue="0.19215688109397888" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="229" translatesAutoresizingMaskIntoConstraints="NO" id="aw5-Zl-OL3">
+                                        <rect key="frame" x="47" y="219" width="229" height="170"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="47o-vF-rU7"/>
+                                        </constraints>
+                                        <string key="text">Welcome to the Mobile Backend Starter sample guestbook app. This simple app allows users to send messages to other instances of the app running on Android or iOS devices. The guestbook app is entirely Android client code, no additional backend coding was required
+
+</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="nU4-eB-ReF" firstAttribute="top" secondItem="Dcn-Wt-NVx" secondAttribute="top" constant="190" id="9o8-3Y-PaW"/>
+                                    <constraint firstItem="I3X-3n-gm0" firstAttribute="top" secondItem="Dcn-Wt-NVx" secondAttribute="top" constant="15" id="Bs6-4W-A4E"/>
+                                    <constraint firstItem="I3X-3n-gm0" firstAttribute="centerX" secondItem="Dcn-Wt-NVx" secondAttribute="centerX" type="default" id="EBx-lO-5Iy"/>
+                                    <constraint firstItem="aw5-Zl-OL3" firstAttribute="leading" secondItem="Dcn-Wt-NVx" secondAttribute="leading" constant="47" id="NKl-go-s2A"/>
+                                    <constraint firstItem="aw5-Zl-OL3" firstAttribute="top" secondItem="nU4-eB-ReF" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="bVB-2k-DhS"/>
+                                    <constraint firstItem="nU4-eB-ReF" firstAttribute="centerX" secondItem="I3X-3n-gm0" secondAttribute="centerX" type="default" id="eFz-GK-DT0"/>
+                                </constraints>
+                            </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="img_dots_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZNc-Dc-8DW">
+                                <rect key="frame" x="133" y="483" width="54" height="12"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="LEE-Gq-w3D"/>
+                                    <constraint firstAttribute="height" constant="12" id="aBy-e0-Nnx"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" image="YES"/>
+                        </accessibility>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Dcn-Wt-NVx" firstAttribute="leading" secondItem="TQy-68-0ez" secondAttribute="leading" constant="7" id="5Mw-8o-vz5"/>
+                            <constraint firstItem="ZNc-Dc-8DW" firstAttribute="centerX" secondItem="Dcn-Wt-NVx" secondAttribute="centerX" type="default" id="Mhv-Su-f3v"/>
+                            <constraint firstAttribute="bottom" secondItem="ZNc-Dc-8DW" secondAttribute="bottom" constant="53" id="YGM-iY-kq1"/>
+                            <constraint firstItem="Dcn-Wt-NVx" firstAttribute="top" secondItem="TQy-68-0ez" secondAttribute="top" constant="28" id="akc-4S-FDP"/>
+                            <constraint firstAttribute="bottom" secondItem="Dcn-Wt-NVx" secondAttribute="bottom" constant="8" id="rjR-SY-RYM"/>
+                            <constraint firstItem="Dcn-Wt-NVx" firstAttribute="centerX" secondItem="TQy-68-0ez" secondAttribute="centerX" type="default" id="y18-AY-dY2"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="u4K-uf-AeX" appends="YES" id="lPC-uV-5SS"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="aw5-Zl-OL3" id="aBn-bj-Vln"/>
+                        <outlet property="titleLabel" destination="nU4-eB-ReF" id="n43-78-cDm"/>
+                        <segue destination="jwz-aZ-Nbj" kind="modal" identifier="SkipSplashScreen" animates="NO" id="Ss3-Vr-3L3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kUD-es-BM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="u4K-uf-AeX">
+                    <connections>
+                        <segue destination="PKL-uL-QOZ" kind="modal" identifier="Splash 1 to Splash 2" modalTransitionStyle="flipHorizontal" id="w7c-TI-hvD"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1754" y="-1047"/>
+        </scene>
+        <!--Splash2 View Controller-->
+        <scene sceneID="3zA-Ab-4KJ">
+            <objects>
+                <viewController id="PKL-uL-QOZ" customClass="Splash2ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uhT-qE-mma">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4e-2M-NHa">
+                                <rect key="frame" x="7" y="28" width="306" height="512"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Backend Starter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVU-45-wxB">
+                                        <rect key="frame" x="17" y="28" width="272" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Wp2-Ve-uh2"/>
+                                            <constraint firstAttribute="width" constant="272" id="hJJ-hA-qw4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.92549026010000002" green="0.7254902124" blue="0.19215688110000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="242" translatesAutoresizingMaskIntoConstraints="NO" id="UT8-Lh-Xdv">
+                                        <rect key="frame" x="39" y="60" width="242" height="170"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="15M-ka-9wh"/>
+                                            <constraint firstAttribute="width" constant="242" id="FqC-Qe-N5H"/>
+                                        </constraints>
+                                        <string key="text">The guestbook app uses the Mobile Backend Starter for messaging and user authentication. The backend also provides a cloud datastore, with public and private objects, and a subscription service to give your apps real time interactivity.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect.png" translatesAutoresizingMaskIntoConstraints="NO" id="LdF-WC-Ha5">
+                                        <rect key="frame" x="64" y="260" width="178" height="64"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" type="user" id="jOO-Y9-FZY"/>
+                                            <constraint firstAttribute="width" constant="178" id="wYw-3u-kOq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="img_dots_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="pji-w1-JGz">
+                                        <rect key="frame" x="126" y="447" width="54" height="12"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="PW2-Qg-fgV"/>
+                                            <constraint firstAttribute="width" constant="54" id="fS1-mP-h8z"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="oVU-45-wxB" firstAttribute="top" secondItem="u4e-2M-NHa" secondAttribute="top" constant="28" type="user" id="0j1-Rf-FJv"/>
+                                    <constraint firstItem="LdF-WC-Ha5" firstAttribute="centerX" secondItem="oVU-45-wxB" secondAttribute="centerX" type="default" id="8x1-Wy-Dfd"/>
+                                    <constraint firstItem="UT8-Lh-Xdv" firstAttribute="top" secondItem="oVU-45-wxB" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="MLF-oS-fk9"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pji-w1-JGz" secondAttribute="bottom" constant="53" type="user" id="aOL-Cj-qnR"/>
+                                    <constraint firstItem="UT8-Lh-Xdv" firstAttribute="leading" secondItem="u4e-2M-NHa" secondAttribute="leading" constant="39" id="asH-Qr-uPZ"/>
+                                    <constraint firstItem="oVU-45-wxB" firstAttribute="leading" secondItem="u4e-2M-NHa" secondAttribute="leading" constant="17" id="bVM-Fg-NzI"/>
+                                    <constraint firstItem="LdF-WC-Ha5" firstAttribute="top" secondItem="u4e-2M-NHa" secondAttribute="top" constant="260" type="user" id="jEp-m5-bYi"/>
+                                    <constraint firstItem="LdF-WC-Ha5" firstAttribute="centerX" secondItem="u4e-2M-NHa" secondAttribute="centerX" type="default" id="lDF-Nv-QCV"/>
+                                    <constraint firstItem="pji-w1-JGz" firstAttribute="centerX" secondItem="LdF-WC-Ha5" secondAttribute="centerX" type="default" id="pbS-Uc-O48"/>
+                                    <constraint firstAttribute="bottom" secondItem="pji-w1-JGz" secondAttribute="bottom" constant="53" type="user" id="xNm-hM-z4H"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="RNm-59-fHy" appends="YES" id="Hxi-A3-fgz"/>
+                                    <outletCollection property="gestureRecognizers" destination="Q5U-QM-1td" appends="YES" id="Mth-he-2zF"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="u4e-2M-NHa" secondAttribute="bottom" constant="8" type="user" id="9Sv-Rl-VnE"/>
+                            <constraint firstItem="u4e-2M-NHa" firstAttribute="centerX" secondItem="uhT-qE-mma" secondAttribute="centerX" type="default" id="QRr-ql-Tye"/>
+                            <constraint firstItem="u4e-2M-NHa" firstAttribute="top" secondItem="uhT-qE-mma" secondAttribute="top" constant="28" type="user" id="pbD-gk-eTG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="UT8-Lh-Xdv" id="dnA-4F-reT"/>
+                        <outlet property="titleLabel" destination="oVU-45-wxB" id="1pL-rl-hJc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0qC-1d-7N5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="RNm-59-fHy">
+                    <connections>
+                        <segue destination="2U6-68-jm3" kind="modal" identifier="Splash 2 to Splash 1" modalTransitionStyle="flipHorizontal" id="NfV-Oi-R1o"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="Q5U-QM-1td">
+                    <connections>
+                        <segue destination="byc-hG-cvZ" kind="modal" modalTransitionStyle="flipHorizontal" id="xkv-4m-MoN"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1345" y="-1047"/>
+        </scene>
+        <!--Splash3 View Controller-->
+        <scene sceneID="07o-hH-wcP">
+            <objects>
+                <viewController id="byc-hG-cvZ" customClass="Splash3ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hLl-sy-Ruw">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enZ-aN-Quq">
+                                <rect key="frame" x="7" y="28" width="306" height="512"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now it’s your turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUk-CU-WEf">
+                                        <rect key="frame" x="17" y="28" width="272" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="OLZ-f8-C5B"/>
+                                            <constraint firstAttribute="width" constant="272" id="d20-si-Q5b"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <color key="textColor" red="0.92549026010000002" green="0.7254902124" blue="0.19215688110000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="211" translatesAutoresizingMaskIntoConstraints="NO" id="Lga-Bb-oED">
+                                        <rect key="frame" x="48" y="60" width="211" height="170"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="Qje-uq-0ge"/>
+                                        </constraints>
+                                        <string key="text">Play around with this app and the source code to become familiar with the Mobile Backend Starter. When you are ready, replace the Guestbook sample code with your own app or game code.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="kUk-CU-WEf" firstAttribute="leading" secondItem="enZ-aN-Quq" secondAttribute="leading" constant="17" id="WVS-Y7-dpw"/>
+                                    <constraint firstItem="Lga-Bb-oED" firstAttribute="top" secondItem="kUk-CU-WEf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="i4g-qc-Ndv"/>
+                                    <constraint firstItem="Lga-Bb-oED" firstAttribute="centerX" secondItem="enZ-aN-Quq" secondAttribute="centerX" type="default" id="jUw-Uf-LTv"/>
+                                    <constraint firstItem="Lga-Bb-oED" firstAttribute="centerX" secondItem="kUk-CU-WEf" secondAttribute="centerX" type="default" id="oXo-wV-TYa"/>
+                                    <constraint firstItem="kUk-CU-WEf" firstAttribute="top" secondItem="enZ-aN-Quq" secondAttribute="top" constant="28" id="wDM-uI-5TL"/>
+                                </constraints>
+                            </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="img_dots_3.png" translatesAutoresizingMaskIntoConstraints="NO" id="3yi-On-Jfd">
+                                <rect key="frame" x="133" y="483" width="54" height="12"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="7Kw-CP-1k1"/>
+                                    <constraint firstAttribute="width" constant="54" type="user" id="eKR-Lk-KeE"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2f-BV-uFR">
+                                <rect key="frame" x="127" y="374" width="66" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="Gvg-dc-InZ"/>
+                                    <constraint firstAttribute="width" constant="66" id="jNm-UJ-7Yk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="img_done.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="jwz-aZ-Nbj" kind="modal" identifier="navigationSegue1" modalTransitionStyle="flipHorizontal" id="7l6-hx-tvA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="enZ-aN-Quq" firstAttribute="top" secondItem="hLl-sy-Ruw" secondAttribute="top" constant="28" id="B3p-dc-KMW"/>
+                            <constraint firstItem="o2f-BV-uFR" firstAttribute="centerX" secondItem="3yi-On-Jfd" secondAttribute="centerX" type="default" id="BHN-2f-phl"/>
+                            <constraint firstAttribute="bottom" secondItem="o2f-BV-uFR" secondAttribute="bottom" constant="141" id="WhP-XT-bQS"/>
+                            <constraint firstItem="enZ-aN-Quq" firstAttribute="centerX" secondItem="3yi-On-Jfd" secondAttribute="centerX" type="default" id="gHN-cm-vVn"/>
+                            <constraint firstAttribute="bottom" secondItem="enZ-aN-Quq" secondAttribute="bottom" constant="8" id="hFe-Gq-Xg0"/>
+                            <constraint firstItem="3yi-On-Jfd" firstAttribute="centerX" secondItem="hLl-sy-Ruw" secondAttribute="centerX" type="default" id="sVf-1u-tEE"/>
+                            <constraint firstAttribute="bottom" secondItem="3yi-On-Jfd" secondAttribute="bottom" constant="53" type="user" id="uIM-Nx-OpG"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="3m5-oe-o5d" appends="YES" id="KJT-Jj-ex4"/>
+                            <outletCollection property="gestureRecognizers" destination="BsX-rj-pcq" appends="YES" id="2eB-ib-bKi"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="Lga-Bb-oED" id="KCP-9C-gFG"/>
+                        <outlet property="titleLabel" destination="kUk-CU-WEf" id="Z13-U9-bFK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IeM-Mb-Auy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="3m5-oe-o5d">
+                    <connections>
+                        <segue destination="PKL-uL-QOZ" kind="modal" modalTransitionStyle="flipHorizontal" id="eFm-Kt-apk"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="BsX-rj-pcq">
+                    <connections>
+                        <segue destination="jwz-aZ-Nbj" kind="modal" identifier="navigationSegue3" modalTransitionStyle="flipHorizontal" id="0rS-PR-vu7"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-912" y="-1047"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cko-0R-gKC">
+            <objects>
+                <navigationController storyboardIdentifier="ApplicationStart" id="jwz-aZ-Nbj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9N4-XH-Dje">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eFf-Qo-AH9" kind="relationship" relationship="rootViewController" id="CHQ-e0-TWh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KbX-b9-TSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-500" y="-1047"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="img_connect.png" width="508" height="185"/>
+        <image name="img_done.png" width="131" height="66"/>
+        <image name="img_dots_1.png" width="108" height="24"/>
+        <image name="img_dots_2.png" width="108" height="24"/>
+        <image name="img_dots_3.png" width="108" height="25"/>
+        <image name="img_guestbook_splash.png" width="307" height="278"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="w7c-TI-hvD"/>
+        <segue reference="Ss3-Vr-3L3"/>
+    </inferredMetricsTieBreakers>
+</document>
