@@ -17,33 +17,19 @@
 // executing the sample.
 
 // Google API installed application client ID. Replace with your own Client ID.
-// MOE:begin_strip
-NSString *const kCloudBackendClientID =
-    @"687054978296-5ibfbj1695lgitflnqfciup3ghoeh101.apps.googleusercontent.com";
-/* MOE:end_strip_and_replace
 NSString *const kCloudBackendClientID = @"{{{ INSERT ID }}}";
-*/
 
 // Google API installed application client secret. Replace with your own Client
 // Secret.
-// MOE:begin_strip
-NSString *const kCloudBackendClientSecret = @"svyEdIMPtfSVHBIo4m-mIIy1";
-/* MOE:end_strip_and_replace
 NSString *const kCloudBackendClientSecret = @"{{{ INSERT SECRET }}}";
-*/
 
 // Arbitrary name for local keychain name.
 NSString *const kCloudBackendChainName = @"cloudbackendiosclient";
 
 // Mobile backend service URL in string format.  Replace with your own service
 // URL.
-// MOE:begin_strip
-NSString *const kCloudBackendServiceURL =
-    @"https://mobilebackend11.appspot.com/_ah/api/rpc?prettyPrint=false";
-/* MOE:end_strip_and_replace
 NSString *const kCloudBackendServiceURL =
     @"https://{{{ INSERT APP ID }}}.appspot.com/_ah/api/rpc?prettyPrint=false";
-*/
 
 // Notification key for hiding the splash screen
 NSString *const kHideSplashScreenKey = @"hideSplashScreen";
@@ -53,4 +39,3 @@ NSString *const kMainStoryboard = @"iphone";
 
 // Navigation storyboard id
 NSString *const kNavigationStoryboardId = @"ApplicationStart";
-

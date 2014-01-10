@@ -13,15 +13,11 @@
  * limitations under the License.
  */
 
-#if !defined(__has_feature) || !__has_feature(objc_arc)
-#error "This file requires ARC support."
-#endif
-
 #import <Foundation/NSNotification.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CloudControllerHelper.h"
 #import "CloudEntity.h"
-#import "Constants.h"
+#import "Constants.m"
 #import "EditModeUITextView.h"
 #import "GTLMobilebackend.h"
 #import "MessagesTableViewController.h"

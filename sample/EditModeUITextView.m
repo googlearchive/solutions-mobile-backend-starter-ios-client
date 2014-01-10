@@ -33,9 +33,9 @@
     [viewLayer setBorderColor:[[UIColor blueColor] CGColor]];
     self.text = nil; // Reset text field to nothing in insert mode
   }
-    
+
   [self setFont:[UIFont systemFontOfSize:17.0]];
-    
+
   [self setReturnKeyType:UIReturnKeySend];
 
   [[self layer] setBorderWidth:2.5];

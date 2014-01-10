@@ -25,10 +25,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   if ([[NSUserDefaults standardUserDefaults] boolForKey:kHideSplashScreenKey]) {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMainStoryboard bundle:nil];
-    UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:kNavigationStoryboardId];
+    UIStoryboard *storyboard =
+        [UIStoryboard storyboardWithName:kMainStoryboard bundle:nil];
+    UIViewController *vc =
+        [storyboard instantiateViewControllerWithIdentifier:kNavigationStoryboardId];
     [vc setModalPresentationStyle:UIModalPresentationFullScreen];
-    
+
     [self presentViewController:vc animated:NO completion:nil];
   }
 }
