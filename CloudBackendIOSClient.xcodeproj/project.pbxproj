@@ -62,6 +62,10 @@
     2FD03BE2174FEE7700D0BFF6 /* GTLMobilebackendQueryDto+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD03BE1174FEE7600D0BFF6 /* GTLMobilebackendQueryDto+Helper.m */; };
     2FF4E1061745753E00AC521E /* CloudMessagingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4E1051745753E00AC521E /* CloudMessagingManager.m */; };
     2FF4E1101746E6A500AC521E /* CloudFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4E10F1746E6A500AC521E /* CloudFilter.m */; };
+    E9BE335118E5444300EBD3FA /* art in Resources */ = {isa = PBXBuildFile; fileRef = E9BE335018E5444300EBD3FA /* art */; };
+    E9BE335418E5456300EBD3FA /* Splash1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BE335318E5456300EBD3FA /* Splash1ViewController.m */; };
+    E9BE335718E545A000EBD3FA /* Splash2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BE335618E545A000EBD3FA /* Splash2ViewController.m */; };
+    E9BE335A18E545E000EBD3FA /* Splash3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BE335918E545E000EBD3FA /* Splash3ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,6 +177,13 @@
     2FF4E1051745753E00AC521E /* CloudMessagingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CloudMessagingManager.m; path = api/CloudMessagingManager.m; sourceTree = SOURCE_ROOT; };
     2FF4E10E1746E6A400AC521E /* CloudFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CloudFilter.h; path = api/CloudFilter.h; sourceTree = SOURCE_ROOT; };
     2FF4E10F1746E6A500AC521E /* CloudFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CloudFilter.m; path = api/CloudFilter.m; sourceTree = SOURCE_ROOT; };
+    E9BE335018E5444300EBD3FA /* art */ = {isa = PBXFileReference; lastKnownFileType = folder; path = art; sourceTree = "<group>"; };
+    E9BE335218E5456300EBD3FA /* Splash1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Splash1ViewController.h; path = sample/Splash1ViewController.h; sourceTree = SOURCE_ROOT; };
+    E9BE335318E5456300EBD3FA /* Splash1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Splash1ViewController.m; path = sample/Splash1ViewController.m; sourceTree = SOURCE_ROOT; };
+    E9BE335518E545A000EBD3FA /* Splash2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Splash2ViewController.h; path = sample/Splash2ViewController.h; sourceTree = SOURCE_ROOT; };
+    E9BE335618E545A000EBD3FA /* Splash2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Splash2ViewController.m; path = sample/Splash2ViewController.m; sourceTree = SOURCE_ROOT; };
+    E9BE335818E545E000EBD3FA /* Splash3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Splash3ViewController.h; path = sample/Splash3ViewController.h; sourceTree = SOURCE_ROOT; };
+    E9BE335918E545E000EBD3FA /* Splash3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Splash3ViewController.m; path = sample/Splash3ViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +213,12 @@
         2FA513FD1742BA20004E1C5B /* MessagesTableViewController.h */,
         2FA513FE1742BA20004E1C5B /* MessagesTableViewController.m */,
         2F72EBA116CB288F00C29E08 /* support */,
+        E9BE335218E5456300EBD3FA /* Splash1ViewController.h */,
+        E9BE335318E5456300EBD3FA /* Splash1ViewController.m */,
+        E9BE335518E545A000EBD3FA /* Splash2ViewController.h */,
+        E9BE335618E545A000EBD3FA /* Splash2ViewController.m */,
+        E9BE335818E545E000EBD3FA /* Splash3ViewController.h */,
+        E9BE335918E545E000EBD3FA /* Splash3ViewController.m */,
       );
       name = sample;
       sourceTree = "<group>";
@@ -209,6 +226,7 @@
     2F72EB8B16CB288E00C29E08 = {
       isa = PBXGroup;
       children = (
+        E9BE335018E5444300EBD3FA /* art */,
         2F4FE6C117FC96860011C780 /* Default-568h@2x.png */,
         2F72EBA016CB288F00C29E08 /* CloudBackendIOSClient */,
         2F72EB9916CB288F00C29E08 /* Frameworks */,
@@ -396,7 +414,7 @@
       isa = PBXProject;
       attributes = {
         LastUpgradeCheck = 0450;
-        ORGANIZATIONNAME = "Google";
+        ORGANIZATIONNAME = Google;
       };
       buildConfigurationList = 2F72EB9016CB288E00C29E08 /* Build configuration list for PBXProject "CloudBackendIOSClient" */;
       compatibilityVersion = "Xcode 3.2";
@@ -424,6 +442,7 @@
         2F4FE6C217FC96860011C780 /* Default-568h@2x.png in Resources */,
         2FD03BDC174EF85100D0BFF6 /* iphone.storyboard in Resources */,
         2F53203717503BA600ED627F /* GTMOAuth2ViewTouch.xib in Resources */,
+        E9BE335118E5444300EBD3FA /* art in Resources */,
       );
       runOnlyForDeploymentPostprocessing = 0;
     };
@@ -443,10 +462,12 @@
         2FA514051742BA20004E1C5B /* MessagesTableViewController.m in Sources */,
         2FF4E1061745753E00AC521E /* CloudMessagingManager.m in Sources */,
         2FF4E1101746E6A500AC521E /* CloudFilter.m in Sources */,
+        E9BE335418E5456300EBD3FA /* Splash1ViewController.m in Sources */,
         2FD03B9A174DA48E00D0BFF6 /* CloudNotificationHandler.m in Sources */,
         2FD03BE2174FEE7700D0BFF6 /* GTLMobilebackendQueryDto+Helper.m in Sources */,
         2F531F32175036D500ED627F /* CloudEntityCollection.m in Sources */,
         2F531FE517503B8D00ED627F /* GTLMobilebackendEntityDto.m in Sources */,
+        E9BE335718E545A000EBD3FA /* Splash2ViewController.m in Sources */,
         2F531FE717503B8D00ED627F /* GTLMobilebackendEntityListDto.m in Sources */,
         2F531FE817503B8D00ED627F /* GTLMobilebackendFilter.m in Sources */,
         2F531FE917503B8D00ED627F /* GTLMobilebackendFilterDto.m in Sources */,
@@ -457,6 +478,7 @@
         2F53202117503BA600ED627F /* GTLBatchQuery.m in Sources */,
         2F53202217503BA600ED627F /* GTLBatchResult.m in Sources */,
         2F53202317503BA600ED627F /* GTLDateTime.m in Sources */,
+        E9BE335A18E545E000EBD3FA /* Splash3ViewController.m in Sources */,
         2F53202417503BA600ED627F /* GTLErrorObject.m in Sources */,
         2F53202517503BA600ED627F /* GTLFramework.m in Sources */,
         2F53202617503BA600ED627F /* GTLJSONParser.m in Sources */,
@@ -506,8 +528,8 @@
         CLANG_ENABLE_OBJC_ARC = YES;
         CLANG_WARN_EMPTY_BODY = YES;
         CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-        CODE_SIGN_IDENTITY = "iPhone Developer";
-        "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+        CODE_SIGN_IDENTITY = "iPhone Developer: Google Development (3F4Y5873JF)";
+        "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Google Development (3F4Y5873JF)";
         COPY_PHASE_STRIP = NO;
         GCC_C_LANGUAGE_STANDARD = gnu99;
         GCC_DYNAMIC_NO_PIC = NO;
@@ -537,8 +559,8 @@
         CLANG_ENABLE_OBJC_ARC = YES;
         CLANG_WARN_EMPTY_BODY = YES;
         CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-        CODE_SIGN_IDENTITY = "iPhone Developer";
-        "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+        CODE_SIGN_IDENTITY = "iPhone Developer: Google Development (3F4Y5873JF)";
+        "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Google Development (3F4Y5873JF)";
         COPY_PHASE_STRIP = YES;
         GCC_C_LANGUAGE_STANDARD = gnu99;
         GCC_WARN_ABOUT_RETURN_TYPE = YES;
