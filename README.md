@@ -1,4 +1,8 @@
-# Mobile Backend Starter iOS Client
+# Mobile Backend Starter iOS 
+
+## Warning: No Longer Supported
+
+The mobile backend starter sample application is no longer supported.  If you are looking for an easy way to connect your mobile app to Google Cloud Platform, we recommend you check out [Cloud Endpoints](https://cloud.google.com/endpoints/).  If you are already using the mobile backend starter your code will continue to work and no modifications are necessary at this time.
 
 ## Copyright
 Copyright 2013 Google Inc. All Rights Reserved.
